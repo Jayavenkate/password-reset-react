@@ -1,0 +1,25 @@
+
+.app{
+  text-align: center;
+}.img{
+  height:400px ;
+  width:300px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+.mobile{
+  /* border: 1px solid black; */
+  height:550px ;
+  width: 400px;
+  border-radius: 12px;
+  margin-top: 20px;
+  background-color: white;
+}
+.mobile-list{
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
