@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import * as yup from "yup";
 export function Home() {
   return (
     <div>
@@ -11,12 +12,16 @@ export function Home() {
     </div>
   );
 }
+const formValidationSchema = yup.object({
+  email: yup.string().email().required("Email address is required"),
+  password: yup.string().required("password required").min(8),
+});
 function LoginForm() {
   const navigate = useNavigate();
   const [formstate, setFormState] = useState("success");
-  const { values, handleChange, handleSubmit } = useFormik({
-    initialValues: { username: "jaya", password: "jaya@123" },
-    // validationSchema: formValidationSchema,
+  const { values, handleChange, handleSubmit, handleBlur,  touched, errors  } = useFormik({
+    initialValues: { email: "jayajaikithuja@gmail.com", password: "jaya@123" },
+    validationSchema: formValidationSchema,
     onSubmit: async (values) => {
       console.log(values);
 
@@ -42,11 +47,14 @@ function LoginForm() {
       <h2>Login</h2>
       <div className="login-form-container">
         <TextField
-          value={values.username}
+          value={values.email}
           onChange={handleChange}
-          name="username"
-          label="UserName"
+          name="email"
+          label="email"
           variant="outlined"
+          onBlur={handleBlur}
+          error={touched.email && errors.email}
+          helperText={touched.email && errors.email ? errors.email : null}
         />
         <TextField
           value={values.password}
@@ -54,6 +62,9 @@ function LoginForm() {
           name="password"
           label="Password"
           variant="outlined"
+          onBlur={handleBlur}
+          error={touched.password && errors.password}
+          helperText={touched.password && errors.password ? errors.password : null}
         />
         <Button color={formstate}type="submit" variant="contained">
          {formstate==="success"?"Submit" :"Retry"}
