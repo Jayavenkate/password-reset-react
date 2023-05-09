@@ -1,29 +1,30 @@
 import Card from "@mui/material/Card";
 import { useState } from "react";
 import { useEffect } from "react";
+import { API } from "../global";
 
-function checkAuth(res){
-  if(res.status==401){
-    throw Error ("unauthorized");
-  }else{
+function checkAuth(res) {
+  if (res.status == 401) {
+    throw Error("unauthorized");
+  } else {
     return res.json();
   }
 }
-function logout(){
+function logout() {
   localStorage.clear();
   window.location.href = "/";
 }
 export function PhoneList() {
   const [mobileList, setMobileList] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/mobiles",{
-      headers:{
-       'x-auth-token':localStorage.getItem("token") ,
+    fetch(`${API}/mobiles`, {
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
       },
     })
       .then((res) => checkAuth(res))
       .then((data) => setMobileList(data))
-      .catch(err=>logout())
+      .catch((err) => logout());
   }, []);
 
   return (

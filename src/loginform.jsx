@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as yup from "yup";
 import { Button, Card, CardContent } from "@mui/material";
+import { API } from "../global";
 
 const formValidationSchema = yup.object({
   email: yup.string().email().required("Email address is required"),
@@ -20,7 +21,7 @@ export function LoginForm() {
       onSubmit: async (values) => {
         console.log(values);
 
-        const data = await fetch("http://localhost:5000/login", {
+        const data = await fetch(`${API}/login`, {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(values),

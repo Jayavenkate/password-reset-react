@@ -3,6 +3,7 @@ import { Button, Card, CardContent } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { API } from "../global";
 
 const formValidationSchema = yup.object({
   username: yup.string().required("required"),
@@ -10,7 +11,7 @@ const formValidationSchema = yup.object({
   password: yup.string().required("password required").min(6),
 });
 export function Signup() {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const { values, handleBlur, handleChange, handleSubmit, touched, errors } =
     useFormik({
       initialValues: {
@@ -21,7 +22,7 @@ export function Signup() {
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
         console.log(values);
-        const data = await fetch("http://localhost:5000/signup", {
+        const data = await fetch(`${API}/signup`, {
           method: "POSt",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(values),
@@ -31,9 +32,9 @@ export function Signup() {
         navigate("/login");
       },
     });
-    const redirect =()=>{
-      navigate("/login");
-    }
+  const redirect = () => {
+    navigate("/login");
+  };
   return (
     <form onSubmit={handleSubmit}>
       <Card className="signup" elevation={3}>
@@ -51,7 +52,7 @@ export function Signup() {
               touched.username && errors.username ? errors.username : ""
             }
           />
-           <TextField
+          <TextField
             value={values.email}
             onChange={handleChange}
             name="email"
@@ -61,8 +62,7 @@ export function Signup() {
             error={touched.email && errors.email}
             helperText={touched.email && errors.email ? errors.email : null}
           />
-          
-         
+
           <TextField
             onChange={handleChange}
             name="password"
@@ -80,7 +80,13 @@ export function Signup() {
           </Button>
           <small>already registered?</small>
         </div>
-        <h4 className="signin" onClick={()=>redirect()} style={{cursor:"pointer"}}>SignIn</h4>
+        <h4
+          className="signin"
+          onClick={() => redirect()}
+          style={{ cursor: "pointer" }}
+        >
+          SignIn
+        </h4>
       </Card>
     </form>
   );

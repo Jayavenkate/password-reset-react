@@ -2,6 +2,7 @@ import { Button, Card, CardContent } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { API } from "../global";
 export function VerifyOtp() {
   const navigate = useNavigate();
   const { handleChange, values, handleSubmit } = useFormik({
@@ -10,7 +11,7 @@ export function VerifyOtp() {
     },
     onSubmit: async (values) => {
       console.log(values);
-      const data = await fetch("http://localhost:5000/verifyotp", {
+      const data = await fetch(`${API}/verifyotp`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(values),
