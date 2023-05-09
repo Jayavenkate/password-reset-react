@@ -35,6 +35,7 @@ body {
 }
 .signup-con {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
