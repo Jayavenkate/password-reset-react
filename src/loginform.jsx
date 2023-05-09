@@ -8,13 +8,16 @@ import * as yup from "yup";
 const formValidationSchema = yup.object({
   email: yup.string().email().required("Email address is required"),
   password: yup.string().required("password required"),
+  // password: yup.string().required("password required").min(8),
 });
 export function LoginForm() {
   const navigate = useNavigate();
   const [formstate, setFormState] = useState("success");
   const { values, handleChange, handleSubmit, handleBlur, touched, errors } =
     useFormik({
-      initialValues: { email: "", password: "" },
+      initialValues: { email: "",
+       password: "" ,
+      },
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
         console.log(values);
