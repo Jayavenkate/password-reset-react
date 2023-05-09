@@ -1,67 +1,3 @@
-// import { Button, Card, CardContent } from "@mui/material";
-// import TextField from "@mui/material/TextField";
-// import { useFormik } from "formik";
-// import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import * as yup from "yup";
-// const formValidationSchema = yup.object({
-//   email: yup.string().email().required("Email address is required"),
-//   password: yup.string().required("password required").min(6),
-// });
-// export function SetPassword() {
-//   const { values, errors, handleSubmit, handleChange, handleBlur, touched } =
-//     useFormik({
-//       initialvalues: {
-//         email: "",
-//         password: "",
-//       },
-//   //     validationSchema: formValidationSchema,
-//   //     onSubmit: async (values) => {
-//   //       console.log(values);
-//   //       const data = await fetch("http://localhost:5000/setpassword", {
-//   //         method: "POSt",
-//   //         headers: { "content-type": "application/json" },
-//   //         body: JSON.stringify(values),
-//   //       });
-//   //       const result = await data.json();
-//   //       console.log(data);
-//   //       navigate("/login");
-//   //     },
-//     });
-//   return (
-//     <form >
-//       <Card className="signup" elevation={3}>
-//         <h3>Reset your Password</h3>
-//         <div className="signup-con">
-//           <TextField
-//             value={values.email}
-//             onChange={handleChange}
-//             name="email"
-//             label="Email"
-//             variant="outlined"
-//             onBlur={handleBlur}
-//             error={touched.email && errors.email}
-//             helperText={touched.email && errors.email ? errors.email : null}
-//           />
-//           <TextField
-//             value={values.password}
-//             onChange={handleChange}
-//             name="password"
-//             label="Password"
-//             variant="outlined"
-//             onBlur={handleBlur}
-//             error={touched.password && errors.password}
-//             helperText={
-//               touched.password && errors.password ? errors.password : null
-//             }
-//           />
-//           <Button type="submit">Confirm</Button>
-//         </div>
-//       </Card>
-//     </form>
-//   );
-// }
-
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -127,7 +63,9 @@ export function SetPassword() {
             }
           />
 
-          <Button variant="contained" color="secondary" type="submit">confirm</Button>
+          <Button variant="contained" color="secondary" type="submit">
+            confirm
+          </Button>
         </div>
       </Card>
     </form>

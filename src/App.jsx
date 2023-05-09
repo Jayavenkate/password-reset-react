@@ -36,7 +36,7 @@ function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
   return token ? (
     <section>
-      <h1>This is Protected Route</h1>
+  
       {children}
     </section>
   ) : (
