@@ -1,9 +1,9 @@
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as yup from "yup";
+import { Button, Card, CardContent } from "@mui/material";
 
 const formValidationSchema = yup.object({
   email: yup.string().email().required("Email address is required"),
@@ -13,7 +13,7 @@ export function ForgetPassword() {
 
   const { values, handleChange, handleSubmit, handleBlur, touched, errors } =
     useFormik({
-      initialValues: { email: "" ,},
+      initialValues: { email: "" },
       validationSchema: formValidationSchema,
       onSubmit: async (values) => {
         console.log(values);
@@ -32,24 +32,27 @@ export function ForgetPassword() {
       },
     });
   return (
-    // <form onSubmit={handleSubmit} className="login-form">
     <form onSubmit={handleSubmit}>
-      <div className="login-form-container">
-        <TextField
-          value={values.email}
-          onChange={handleChange}
-          name="email"
-          label="email"
-          variant="outlined"
-          onBlur={handleBlur}
-          error={touched.email && errors.email}
-          helperText={touched.email && errors.email ? errors.email : null}
-        />
+      <Card className="signup" elevation={3}>
+        <h3>Trouble with logging in?</h3>
+        <p>Enter your email address and we will send OTP</p>
+        <div className="signup-con">
+          <TextField
+            value={values.email}
+            onChange={handleChange}
+            name="email"
+            label="email"
+            variant="outlined"
+            onBlur={handleBlur}
+            error={touched.email && errors.email}
+            helperText={touched.email && errors.email ? errors.email : null}
+          />
 
-        <Button type="submit" variant="contained">
-          Send OTP
-        </Button>
-      </div>
+          <Button type="submit" variant="contained" color="secondary">
+            Send OTP
+          </Button>
+        </div>
+      </Card>
     </form>
   );
 }

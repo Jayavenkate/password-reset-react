@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import { Button, Card, CardContent } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -31,9 +32,12 @@ export function Signup() {
         navigate("/login");
       },
     });
+    const redirect =()=>{
+      navigate("/login");
+    }
   return (
     <form onSubmit={handleSubmit}>
-      <div className="signup">
+      <Card className="signup" elevation={3}>
         <h1>SignUp </h1>
         <div className="signup-con">
           <TextField
@@ -43,21 +47,23 @@ export function Signup() {
             value={values.username}
             label="UserName"
             variant="outlined"
-            error={touched.username && touched.error}
+            error={touched.username && errors.username}
             helperText={
               touched.username && errors.username ? errors.username : ""
             }
           />
-          <TextField
+           <TextField
+            value={values.email}
             onChange={handleChange}
             name="email"
-            onBlur={handleBlur}
-            value={values.email}
-            label="Email"
+            label="email"
             variant="outlined"
-            error={touched.email && touched.error}
-            helperText={touched.email && errors.email ? errors.email : ""}
+            onBlur={handleBlur}
+            error={touched.email && errors.email}
+            helperText={touched.email && errors.email ? errors.email : null}
           />
+          
+         
           <TextField
             onChange={handleChange}
             name="password"
@@ -65,16 +71,18 @@ export function Signup() {
             value={values.password}
             label="Password"
             variant="outlined"
-            error={touched.password && touched.error}
+            error={touched.password && errors.password}
             helperText={
               touched.password && errors.password ? errors.password : ""
             }
           />
           <Button type="submit" variant="contained">
-            Submit
+            Register
           </Button>
+          <small>already registered?</small>
         </div>
-      </div>
+        <h4 className="signin" onClick={()=>redirect()} style={{cursor:"pointer"}}>SignIn</h4>
+      </Card>
     </form>
   );
 }
